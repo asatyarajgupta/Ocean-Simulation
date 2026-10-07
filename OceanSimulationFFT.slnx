@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="OceanSimulationFFT/OceanSimulationFFT.vcxproj" Id="e0800cae-daa4-4b94-96d4-c7899f53d842" />
+</Solution>
