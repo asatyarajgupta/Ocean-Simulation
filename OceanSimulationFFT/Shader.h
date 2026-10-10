@@ -19,6 +19,7 @@ public:
 	unsigned int ID;
 	Shader(const char* vertexPath, const char* fragPath);
 	Shader(const char* vertexPath, const char* fragPath, const char* geomPath);
+	Shader(const char* computePath);
 	void use();
 	void setBool(const std::string& name, bool value) const;
 	void setInt(const std::string& name, int value) const;

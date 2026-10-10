@@ -64,6 +64,7 @@ int main() {
     unsigned int skybox = loadCubemap(faces);
     Shader shader{ "./vertexShader.vert", "./fragShader.frag" };
     Shader skyboxShader{ "./skyboxVertexShader.vert", "./skyboxFragShader.frag" };
+    Shader computeShader{ "./initialSpectrum.comp" };
     unsigned int waterTexture = loadTexture("./waterTexture.jpg", "simple");
     float quadVertices[] = {
         // positions        // texture Coords
@@ -152,7 +153,7 @@ int main() {
     shader.setFloat("light.quadratic", 0.0007f);
     shader.setFloat("light.cutoff", glm::cos(glm::radians(12.5f)));
 
-
+    
 
     while (!glfwWindowShouldClose(window)) {
         float currentFrame = static_cast<float>(glfwGetTime());

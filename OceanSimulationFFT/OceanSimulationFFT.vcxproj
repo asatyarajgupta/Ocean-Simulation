@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragShader.frag" />
+    <None Include="intialSpectrum.comp" />
     <None Include="skyboxFragShader.frag" />
     <None Include="skyboxVertexShader.vert" />
     <None Include="vertexShader.vert" />

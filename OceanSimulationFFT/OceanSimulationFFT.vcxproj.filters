@@ -59,5 +59,6 @@
     <None Include="fragShader.frag" />
     <None Include="skyboxVertexShader.vert" />
     <None Include="skyboxFragShader.frag" />
+    <None Include="intialSpectrum.comp" />
   </ItemGroup>
 </Project>

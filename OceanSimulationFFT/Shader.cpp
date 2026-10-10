@@ -65,6 +65,56 @@ Shader::Shader(const char* vertexPath, const char* fragPath) {
 	glDeleteShader(vShader);
 	glDeleteShader(fShader);
 }
+
+// compute shader
+Shader::Shader(const char* computePath) {
+	std::string computeCode;
+	std::ifstream computeFile;
+	computeFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+	try {
+		computeFile.open(computePath);
+		std::stringstream computeStream;
+
+		computeStream << computeFile.rdbuf();
+		computeFile.close();
+
+		computeCode= computeStream.str();
+	}
+	catch (std::ifstream::failure e) {
+		std::cout << "Error occured while reading the shader files: " << std::endl;
+	}
+	const char* computeShaderCode= computeCode.c_str();
+
+	int success;
+	char infoLog[512];
+	//create and compile vShader
+	unsigned int cShader;
+	cShader = glCreateShader(GL_COMPUTE_SHADER);
+	glShaderSource(cShader , 1, &computeShaderCode, NULL);
+	glCompileShader(cShader);
+
+	//checking for compilation errors
+
+	glGetShaderiv(cShader, GL_COMPILE_STATUS, &success);
+	if (!success) {
+		glGetShaderInfoLog(cShader, 512, NULL, infoLog);
+		std::cout << "Vertex Shader compilation failed with " << infoLog << std::endl;
+	}
+	
+
+	ID = glCreateProgram();
+	glAttachShader(ID, cShader);
+	glLinkProgram(ID);
+	glGetProgramiv(ID, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(ID, 512, NULL, infoLog);
+		std::cout << "Failed to link the program with " << infoLog << std::endl;
+	}
+
+	glDeleteShader(cShader);
+}
+
 Shader::Shader(const char* vertexPath, const char* fragPath, const char* geomPath) {
 	std::string vertexCode;
 	std::string fragCode;
@@ -149,6 +199,8 @@ Shader::Shader(const char* vertexPath, const char* fragPath, const char* geomPat
 	glDeleteShader(fShader);
 	glDeleteShader(gShader);
 }
+
+
 
 void Shader::use() {
 	glUseProgram(ID);
